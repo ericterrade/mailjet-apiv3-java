@@ -28,6 +28,9 @@ public class Listrecipient {
 	public static String IGNOREDELETED = "IgnoreDeleted";
 	public static String LASTACTIVITYAT = "LastActivityAt";
 	public static String LISTNAME = "ListName";
+        public static String LISTID = "ListID";
+        public static String CONTACTID = "ContactID";
+        public static String CONTACTALT = "ContactAlt";
 	public static String OPENED = "Opened";
 	public static String STATUS = "Status";
 	public static String UNSUB = "Unsub";
