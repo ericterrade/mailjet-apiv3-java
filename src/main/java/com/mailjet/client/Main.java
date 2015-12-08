@@ -17,32 +17,21 @@
 package com.mailjet.client;
 
 import com.mailjet.client.errors.MailjetException;
-import com.mailjet.client.resource.Contact;
-import com.mailjet.client.resource.Email;
-import com.mailjet.client.resource.Sender;
-import org.json.JSONArray;
-import org.json.JSONObject;
+import com.mailjet.client.resource.Contactslist;
 
 /**
  *
  * @author Guillaume Badi - Mailjet
  */
 public class Main {
-
     public static void main(String[] args) throws MailjetException {
-        MailjetClient client = new MailjetClient(System.getenv("MJ_APIKEY_PUBLIC"), System.getenv("MJ_APIKEY_PRIVATE"));
-//        client.setDebug(MailjetClient.VERBOSE_DEBUG);
-        
-        MailjetRequest sender = new MailjetRequest(Sender.resource)
-                        .filter(Sender.EMAIL, "gbadi@student.42.fr");
-        
-        MailjetResponse senders = client.get(sender);
-        
-        JSONObject firstSender = senders.getData().getJSONObject(0);
-        
-        MailjetRequest update = new MailjetRequest(Sender.resource, firstSender.getLong("ID"))
-                    .setBody(firstSender.put(Sender.NAME, "GuillaumeBadi"));
+        MailjetClient client = new MailjetClient("4e4f93d73a19e4c61210aa2e7cddd193", "e200b7563144d92754ed7b71e06a027c");
+        client.setDebug(MailjetClient.VERBOSE_DEBUG);
 
-        System.out.println(client.put(update));
+        MailjetRequest request = new MailjetRequest(Contactslist.resource).filter("id", 1);
+
+        MailjetResponse response = client.delete(request);
+        System.out.println(response);
     }
 }
+

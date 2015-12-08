@@ -111,6 +111,7 @@ public class MailjetClient {
      * @throws MailjetException
      */
     public MailjetResponse get(MailjetRequest request) throws MailjetException {
+        String responseBody;
         try {
             String url = _baseUrl + request.buildUrl();
             
@@ -121,10 +122,14 @@ public class MailjetClient {
             ParameterMap p = new ParameterMap();
             p.putAll(request._filters);
             HttpResponse response = _client.get(url, p);
-            return new MailjetResponse(
-                    response.getStatus(),
-                    new JSONObject(response.getBodyAsString())
-            );
+            
+            if (response.getBodyAsString().length() == 0) {
+                responseBody = "{}";
+            } else {
+                responseBody = response.getBodyAsString();
+            }
+            
+            return new MailjetResponse(response.getStatus(), new JSONObject(responseBody));
         } catch (MalformedURLException ex) {
             throw new MailjetException("Internal Exception: Malformed URL");
         } catch (UnsupportedEncodingException ex) {
@@ -139,7 +144,7 @@ public class MailjetClient {
      * @throws com.mailjet.client.errors.MailjetException
      */
     public MailjetResponse post(MailjetRequest request) throws MailjetException {
-        
+        String responseBody;
         try {
             String url = request.buildUrl();
             
@@ -152,7 +157,13 @@ public class MailjetClient {
             HttpResponse response;
             
             response = _client.post(_baseUrl + url, request.getContentType(), request.getBody().getBytes());
-            return new MailjetResponse(response.getStatus(), new JSONObject(response.getBodyAsString()));
+            if (response.getBodyAsString().length() == 0) {
+                responseBody = "{}";
+            } else {
+                responseBody = response.getBodyAsString();
+            }
+            
+            return new MailjetResponse(response.getStatus(), new JSONObject(responseBody));
         } catch (MalformedURLException ex) {
             throw new MailjetException("Internal Exception: Malformed Url");
         } catch (UnsupportedEncodingException ex) {
@@ -161,6 +172,7 @@ public class MailjetClient {
     }
     
     public MailjetResponse put(MailjetRequest request) throws MailjetException {
+        String responseBody;
         try {
             String url = request.buildUrl();
             
@@ -173,7 +185,13 @@ public class MailjetClient {
             HttpResponse response;
             
             response = _client.put(_baseUrl + url, request.getContentType(), request.getBody().getBytes());
-            return new MailjetResponse(response.getStatus(), new JSONObject(response.getBodyAsString()));
+            if (response.getBodyAsString().length() == 0) {
+                responseBody = "{}";
+            } else {
+                responseBody = response.getBodyAsString();
+            }
+            
+            return new MailjetResponse(response.getStatus(), new JSONObject(responseBody));
         } catch (MalformedURLException ex) {
             throw new MailjetException("Internal Exception: Malformed Url");
         } catch (UnsupportedEncodingException ex) {
@@ -182,6 +200,8 @@ public class MailjetClient {
     }
     
     public MailjetResponse delete(MailjetRequest request) throws MailjetException {
+        String responseBody;
+        
         try {
             String url = request.buildUrl();
             
@@ -194,8 +214,15 @@ public class MailjetClient {
             
             ParameterMap p = new ParameterMap();
             p.putAll(request._filters);
-            response = _client.get(_baseUrl + url, p);
-            return new MailjetResponse(response.getStatus(), new JSONObject(response.getBodyAsString()));
+            response = _client.delete(_baseUrl + url, p);
+            
+            if (response.getBodyAsString().length() == 0) {
+                responseBody = "{}";
+            } else {
+                responseBody = response.getBodyAsString();
+            }
+            
+            return new MailjetResponse(response.getStatus(), new JSONObject(responseBody));
         } catch (MalformedURLException ex) {
             throw new MailjetException("Internal Exception: Malformed Url");
         } catch (UnsupportedEncodingException ex) {
