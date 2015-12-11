@@ -210,9 +210,11 @@ public class MailjetRequest {
      * @param key
      * @param value
      * @return the request itself
+     * @throws java.io.UnsupportedEncodingException
      */
-    public MailjetRequest filter(String key, String value) {
-        _filters.put(key, value);
+    public MailjetRequest filter(String key, String value) throws UnsupportedEncodingException {
+        String encoded = new String(value.getBytes("UTF-8"));
+        _filters.put(key, encoded);
         return this;
     }
     
@@ -221,8 +223,9 @@ public class MailjetRequest {
      * @param key
      * @param value
      * @return the request itself
+     * @throws java.io.UnsupportedEncodingException
      */
-    public MailjetRequest filter(String key, int value) {
+    public MailjetRequest filter(String key, int value) throws UnsupportedEncodingException {
         return filter(key, String.valueOf(value));
     }
     
