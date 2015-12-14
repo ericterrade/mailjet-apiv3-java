@@ -59,7 +59,7 @@ public class MailjetRequest {
      * Every filter should be string values. So Integer will be cast into
      * Strings
      */
-    HashMap<String, String> _filters =  new HashMap<>();
+    HashMap<String, String> _filters =  new HashMap<String, String>();
     
     /**
      * The request body is a JSONObject that will be cast into a String before the 
@@ -212,9 +212,9 @@ public class MailjetRequest {
      * @return the request itself
      * @throws java.io.UnsupportedEncodingException
      */
-    public MailjetRequest filter(String key, String value) throws UnsupportedEncodingException {
-        String encoded = new String(value.getBytes("UTF-8"));
-        _filters.put(key, encoded);
+    public MailjetRequest filter(String key, String value) {
+//        String encoded = new String(value.getBytes("UTF-8"));
+        _filters.put(key, value);
         return this;
     }
     
@@ -225,7 +225,7 @@ public class MailjetRequest {
      * @return the request itself
      * @throws java.io.UnsupportedEncodingException
      */
-    public MailjetRequest filter(String key, int value) throws UnsupportedEncodingException {
+    public MailjetRequest filter(String key, int value) {
         return filter(key, String.valueOf(value));
     }
     

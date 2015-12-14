@@ -80,6 +80,7 @@ com/mailjet/client/resource/TemplateDetailcontent.class
 com/mailjet/client/resource/Contacthistorydata.class
 com/mailjet/client/resource/Sender.class
 com/mailjet/client/resource/Newslettertemplatecategory.class
+com/mailjet/client/Main.class
 com/mailjet/client/resource/ContactslistImportList.class
 com/mailjet/client/resource/Axtesting.class
 com/mailjet/client/resource/CampaigndraftDetailcontent.class
