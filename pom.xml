@@ -21,7 +21,7 @@
     <scm>
         <connection>scm:git:git@github.com:mailjet/mailjet-apiv3-java.git</connection>
         <developerConnection>scm:git:git@github.com:mailjet/mailjet-apiv3-java.git</developerConnection>
-        <url>git@github.com:juven/mailjet-apiv3-java.git</url>
+        <url>git@github.com:mailjet/mailjet-apiv3-java.git</url>
     </scm>
     <licenses>
         <license>
